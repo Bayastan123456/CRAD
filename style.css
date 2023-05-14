@@ -1,0 +1,107 @@
+body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.container{
+    background-image: url(./image/Без\ названия.jfif);
+    color: slateblue;
+}
+h1{
+    text-align: center;
+}
+.app{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+input{
+    height: 50px;
+    margin-top: 5px;
+    border: 2px solid darkblue;
+    border-radius: 20px;
+    width: 20vw;
+}
+.btn-create{
+    margin-top: 5px;
+    color: white;
+    background-color: dodgerblue;
+    height: 40px;
+    width: 10vw;
+    border: 2px solid blue;
+    border-radius: 120px;
+    cursor: pointer;
+}
+
+.list{
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.card{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 20vw;
+    text-align: center;
+    margin-left: 20px;
+    border: 2px solid blue;
+    background-color: azure;
+}
+
+.btn-edit{
+    background-color: blue;
+    color: azure;
+    height: 40px;
+    border-radius: 2px solid blue;
+    border-radius: 50px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+.btn-delete{
+    background-color: blue;
+    color: azure;
+    height: 40px;
+    border-radius: 2px solid blue;
+    border-radius: 50px;
+    cursor: pointer;
+}
+button:hover{
+    background-color: darkturquoise;
+}
+.modal-container > h2{
+    color: darkturquoise;
+    text-align: center;
+}
+.modal{
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    display: none;
+}
+.btn-save{
+    background-color: dodgerblue;
+    color: azure;
+    height: 40px;
+    border-radius: 2px solid blue;
+    border-radius: 50px;
+    width: 100px;
+    cursor: pointer;
+}
+.btn-close{
+    background-color: dodgerblue;
+    color: azure;
+    height: 40px;
+    border-radius: 2px solid blue;
+    border-radius: 50px;
+    width: 100px;
+    cursor: pointer;
+}
+
+img{
+    height: 20cqmax;
+}
