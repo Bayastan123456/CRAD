@@ -1,3 +1,5 @@
+let API = "http://localhost:8000/products";
+
 let name = document.querySelector("#name");
 let email = document.querySelector("#email");
 let phone = document.querySelector("#phone");
@@ -7,7 +9,26 @@ let img = document.querySelector("#img");
 let btn = document.querySelector(".btn-create");
 let list = document.querySelector(".list");
 
-let API = "http://localhost:8000/products";
+let search = document.querySelector(".nav-inp");
+let searchVal = "";
+
+let modal = document.querySelector(".modal");
+let btnEdit = document.querySelector(".btn-edit");
+let btnSave = document.querySelector(".btn-save");
+let btnClose = document.querySelector(".btn-close");
+let app = document.querySelector(".app");
+let container = document.querySelector(".container");
+
+let nameEdit = document.querySelector("#name-edit");
+let emailEdit = document.querySelector("#email-edit");
+let phoneEdit = document.querySelector("#phone-edit");
+let adresEdit = document.querySelector("#adress-edit");
+let imgEdit = document.querySelector("#img-edit");
+
+let prev = document.querySelector(".pag__block1");
+let next = document.querySelector(".pag__block2");
+let currentPage = 1;
+let pageTotalCount = 1;
 
 btn.addEventListener("click", async function () {
   if (
@@ -47,9 +68,12 @@ btn.addEventListener("click", async function () {
 });
 
 async function render() {
-  let contact = await fetch(API)
+  let contact = await fetch(
+    `${API}?q=${searchVal}&_page=${currentPage}&_limit=4`
+  )
     .then((res) => res.json())
     .catch((err) => console.log(err));
+  drawPaginationButtons();
   list.innerHTML = "";
   contact.forEach((element) => {
     console.log(list);
@@ -77,19 +101,6 @@ async function deleteElement(id) {
   });
   render();
 }
-
-let modal = document.querySelector(".modal");
-let btnEdit = document.querySelector(".btn-edit");
-let btnSave = document.querySelector(".btn-save");
-let btnClose = document.querySelector(".btn-close");
-let app = document.querySelector(".app");
-let container = document.querySelector(".container");
-
-let nameEdit = document.querySelector("#name-edit");
-let emailEdit = document.querySelector("#email-edit");
-let phoneEdit = document.querySelector("#phone-edit");
-let adresEdit = document.querySelector("#adress-edit");
-let imgEdit = document.querySelector("#img-edit");
 
 function editElement(id) {
   modal.style.display = "block";
@@ -143,4 +154,33 @@ function saveEdit(editedProduct, id) {
 btnClose.addEventListener("click", () => {
   modal.style.display = "none";
   container.style.display = "block";
+});
+
+search.addEventListener("input", (e) => {
+  searchVal = e.target.value;
+  render();
+});
+
+function drawPaginationButtons() {
+  fetch(`${API}?q=${searchVal}`)
+    .then((res) => res.json())
+    .then((data) => {
+      pageTotalCount = Math.ceil(data.length / 4);
+    });
+}
+
+prev.addEventListener("click", () => {
+  if (currentPage <= 1) {
+    return;
+  }
+  currentPage--;
+  render();
+});
+
+next.addEventListener("click", () => {
+  if (currentPage >= pageTotalCount) {
+    return;
+  }
+  currentPage++;
+  render();
 });
